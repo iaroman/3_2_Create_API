@@ -2,41 +2,34 @@ package ru.hogwarts.school.service;
 
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Faculty;
+import ru.hogwarts.school.repository.FacultyRepository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 @Service
 public class FacultyServiceImpl implements FacultyService{
-    private Map<Long, Faculty> facultyMap = new HashMap<>();
+    private final FacultyRepository facultyRepository;
+
+    public FacultyServiceImpl(FacultyRepository facultyRepository) {
+        this.facultyRepository = facultyRepository;
+    }
+
     public Faculty create(Faculty faculty) {
-        facultyMap.put(faculty.getId(), faculty);
-        return faculty;
+        return facultyRepository.save(faculty);
     }
     public void delete(Long id) {
-        facultyMap.remove(id);
+        facultyRepository.deleteById(id);
     }
     public Faculty get(Long id) {
-        if (facultyMap.containsKey(id)) {
-           return facultyMap.get(id);
-        }
-        return null;
+        return facultyRepository.findById(id).get();
     }
-    public Faculty update(Long id, Faculty faculty) {
-        if (facultyMap.containsKey(id)) {
-            facultyMap.get(id).setName(faculty.getName());
-            facultyMap.get(id).setColor(faculty.getColor());
-            return facultyMap.get(id);
-        }
-        return null;
+    public Collection<Faculty> getAll() {
+        return facultyRepository.findAll();
     }
-    public List<Faculty> getListFacultyByColor(String color) {
-        List<Faculty> list = new ArrayList<>();
-        for (Faculty value : facultyMap.values()) {
-            if (color.equals(value.getColor()))
-                list.add(value);
-        }
-        return list;
+    public Faculty update(Faculty faculty) {
+        return facultyRepository.save(faculty);
+    }
+    public Collection<Faculty> findByColor(String color) {
+        return facultyRepository.findByColor(color);
     }
 }

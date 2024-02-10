@@ -4,9 +4,9 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
-import ru.hogwarts.school.service.StudentServiceImpl;
 
-import java.util.List;
+import java.util.Collection;
+
 
 @RestController
 @RequestMapping("/student")
@@ -26,18 +26,18 @@ public class StudentController {
             return studentService.get(id);
         return null;
     }
-    @PutMapping("{id}")
-    public Student updateStudent(@PathVariable Long id, @RequestBody Student student) {
-        return studentService.update(id, student);
+    @GetMapping
+    public Collection<Student> getAll () {
+        return studentService.getAll();
+    }
+    @PutMapping
+    public Student updateStudent(@RequestBody Student student) {
+        return studentService.update(student);
     }
     @DeleteMapping("{id}")
     public void delStudent(@PathVariable Long id) {
         if (!(id == null))
             studentService.delete(id);
-    }
-    @GetMapping
-    public List<Student> getListStudentsByAge(@RequestParam int age) {
-        return studentService.getListStudentsByAge(age);
     }
     @PostConstruct
     public void forTest() {

@@ -1,20 +1,28 @@
 package ru.hogwarts.school.model;
 
-import org.springframework.stereotype.Service;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.util.Objects;
-
+@Entity
 public class Faculty {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String color;
-    static private Long counter = 0L;
 
     public Faculty(String name, String color) {
         this.name = name;
         this.color = color;
-        id = counter++;
     }
+
+    public Faculty() {
+
+    }
+
     public Long getId() {
         return id;
     }
