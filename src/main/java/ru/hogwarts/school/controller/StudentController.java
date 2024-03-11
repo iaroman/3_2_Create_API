@@ -43,12 +43,14 @@ public class StudentController {
     @GetMapping
     @Operation(summary = "Get all student or between from/to")
     public Collection<Student> getStudent(@RequestParam(required = false) Integer from,
-                                          @RequestParam(required = false) Integer to) {
+                                          @RequestParam(required = false) Integer to,
+                                          @RequestParam Integer pageNumber,
+                                          @RequestParam Integer pageSize) {
 
         if ((from != null) & (to != null)) {
             return studentService.findByAgeBetween(from, to);
         }
-        return studentService.getAll();
+        return studentService.getAll(pageNumber, pageSize);
     }
 
     @PutMapping
@@ -63,6 +65,22 @@ public class StudentController {
         if (id != null)
             studentService.delete(id);
     }
+    @GetMapping("/count")
+    @Operation(summary = "Count all students in school")
+    public int countAllStudents() {
+        return studentService.countAllStudents();
+    }
+    @GetMapping("/average-age")
+    @Operation(summary = "Get average age students")
+    public int getAvgAgeStudents() {
+        return studentService.getAvgAgeStudents();
+    }
+    @GetMapping("/get-last-five")
+    @Operation(summary = "Get last five students")
+    public Collection<Student> getLastFiveStudent() {
+        return studentService.getLastFiveStudent();
+    }
+
    /* @PostConstruct
     public void forTest() {
         studentService.create(new Student("first", 10));

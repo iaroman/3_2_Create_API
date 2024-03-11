@@ -1,5 +1,7 @@
 package ru.hogwarts.school.service;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
@@ -26,13 +28,23 @@ public class StudentServiceImpl implements StudentService{
     public Student update(Student student) {
         return studentRepository.save(student);
     }
-    public Collection<Student> getAll() {
-        return studentRepository.findAll();
+    public Collection<Student> getAll(Integer pageNumber, Integer pageSize) {
+        PageRequest pageRequest = PageRequest.of(pageNumber -1, pageSize);
+        return studentRepository.findAll(pageRequest).getContent();
     }
     public Collection<Student> findByAgeBetween(int from, int to) {
         return studentRepository.findByAgeBetween(from,to);
     }
     public Faculty getFacultyById(Long studentId) {
         return studentRepository.findById(studentId).get().getFaculty();
+    }
+    public int countAllStudents() {
+        return studentRepository.countAllStudents();
+    }
+    public int getAvgAgeStudents(){
+        return studentRepository.getAvgAgeStudents();
+    }
+    public Collection<Student> getLastFiveStudent() {
+        return studentRepository.getLastFiveStudent();
     }
 }
