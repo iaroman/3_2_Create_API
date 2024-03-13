@@ -1,3 +1,4 @@
+
 package ru.hogwarts.school;
 
 import org.assertj.core.api.Assertions;

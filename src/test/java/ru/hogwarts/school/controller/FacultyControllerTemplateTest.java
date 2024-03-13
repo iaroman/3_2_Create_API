@@ -1,3 +1,4 @@
+
 package ru.hogwarts.school.controller;
 
 import org.assertj.core.api.Assertions;
