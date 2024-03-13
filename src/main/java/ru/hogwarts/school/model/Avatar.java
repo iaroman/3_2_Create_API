@@ -9,7 +9,7 @@ import java.util.Objects;
 //@Table(name = "avatar")
 public class Avatar {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String filePath;
     private long fileSize;

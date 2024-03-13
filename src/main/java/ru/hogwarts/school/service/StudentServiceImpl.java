@@ -28,9 +28,9 @@ public class StudentServiceImpl implements StudentService{
     public Student update(Student student) {
         return studentRepository.save(student);
     }
-    public Collection<Student> getAll(Integer pageNumber, Integer pageSize) {
-        PageRequest pageRequest = PageRequest.of(pageNumber -1, pageSize);
-        return studentRepository.findAll(pageRequest).getContent();
+    public Collection<Student> getAll(/*Integer pageNumber, Integer pageSize*/) {
+//        PageRequest pageRequest = PageRequest.of(pageNumber -1, pageSize);
+        return studentRepository.findAll(/*pageRequest*/)/*.getContent()*/;
     }
     public Collection<Student> findByAgeBetween(int from, int to) {
         return studentRepository.findByAgeBetween(from,to);

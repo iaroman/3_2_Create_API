@@ -43,14 +43,14 @@ public class StudentController {
     @GetMapping
     @Operation(summary = "Get all student or between from/to")
     public Collection<Student> getStudent(@RequestParam(required = false) Integer from,
-                                          @RequestParam(required = false) Integer to,
-                                          @RequestParam Integer pageNumber,
-                                          @RequestParam Integer pageSize) {
+                                          @RequestParam(required = false) Integer to
+                                          /*@RequestParam Integer pageNumber,
+                                          @RequestParam Integer pageSize*/) {
 
         if ((from != null) & (to != null)) {
             return studentService.findByAgeBetween(from, to);
         }
-        return studentService.getAll(pageNumber, pageSize);
+        return studentService.getAll(/*pageNumber, pageSize*/);
     }
 
     @PutMapping

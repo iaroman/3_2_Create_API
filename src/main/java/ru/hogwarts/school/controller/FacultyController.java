@@ -1,12 +1,14 @@
 package ru.hogwarts.school.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.FacultyService;
 
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/faculty")
@@ -19,8 +21,9 @@ public class FacultyController {
 
     @PostMapping
     @Operation(summary = "Create faculty")
-    public Faculty createFaculty(@RequestBody Faculty faculty) {
-        return facultyService.create(faculty);
+    public ResponseEntity<Faculty> createFaculty(@RequestBody Faculty facultyRs) {
+        Faculty faculty = facultyService.create(facultyRs);
+        return ResponseEntity.ok(faculty);
     }
     @GetMapping("{id}")
     @Operation(summary = "Get faculty by id")

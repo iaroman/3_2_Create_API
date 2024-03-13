@@ -10,7 +10,7 @@ public interface StudentService {
     void delete(Long id);
     Student get(Long id);
     Student update(Student student);
-    Collection<Student> getAll(Integer pageNumber, Integer pageSize);
+    Collection<Student> getAll(/*Integer pageNumber, Integer pageSize*/);
     Collection<Student> findByAgeBetween(int from, int to);
     Faculty getFacultyById(Long studentId);
     int countAllStudents();
