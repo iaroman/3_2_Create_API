@@ -15,5 +15,6 @@ public interface FacultyService {
     Collection<Faculty> findByColor(String color);
     Collection<Faculty> findByName(String name);
     Collection<Student> getListStudentsByIdFaculty(Long id);
+    String getMaxNameFaculty();
 
 }

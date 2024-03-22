@@ -60,6 +60,11 @@ public class FacultyController {
         if (!(id == null))
             facultyService.delete(id);
     }
+    @GetMapping("/max-length-name-faculty")
+    @Operation(summary = "Get name faculty with max length")
+    public ResponseEntity<String> getMaxNameFaculty() {
+        return ResponseEntity.ok(facultyService.getMaxNameFaculty());
+    }
     /*@PostConstruct
     public void forTest() {
         facultyService.create(new Faculty("wweeerrrr", "white"));

@@ -1,6 +1,7 @@
 package ru.hogwarts.school.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
@@ -79,6 +80,16 @@ public class StudentController {
     @Operation(summary = "Get last five students")
     public Collection<Student> getLastFiveStudent() {
         return studentService.getLastFiveStudent();
+    }
+    @GetMapping("/get-started-with-A")
+    @Operation(summary = "Get List student starting with A")
+    public ResponseEntity<Collection<String>> getListStudentsStartedWithA() {
+        return ResponseEntity.ok(studentService.getListStudentsStartedWithA());
+    }
+    @GetMapping("/get-average-age")
+    @Operation(summary = "Get average age all students")
+    public ResponseEntity<Double> getAvrAgeStudents() {
+        return ResponseEntity.ok(studentService.getAvrAgeStudents());
     }
 
    /* @PostConstruct

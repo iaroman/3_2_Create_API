@@ -52,4 +52,14 @@ public class FacultyServiceImpl implements FacultyService{
         logger.info("Was invoked method for get list students by ID faculty");
         return facultyRepository.findById(id).get().getStudentSet();
     }
+    public String getMaxNameFaculty() {
+        List<Faculty> listFaculty = facultyRepository.findAll();
+
+        String maxNameFaculty = listFaculty.stream()
+                .map(Faculty::getName)
+                .max((s1, s2) -> s1.length()-s2.length())
+                .orElse(null);
+
+        return maxNameFaculty;
+    }
 }

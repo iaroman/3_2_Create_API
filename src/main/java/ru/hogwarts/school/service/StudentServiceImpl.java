@@ -10,6 +10,8 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repository.StudentRepository;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentServiceImpl implements StudentService{
@@ -59,5 +61,28 @@ public class StudentServiceImpl implements StudentService{
     public Collection<Student> getLastFiveStudent() {
         logger.info("Was invoked method for get list last five students");
         return studentRepository.getLastFiveStudent();
+    }
+
+    public Collection<String> getListStudentsStartedWithA() {
+        List<Student> studentList = studentRepository.findAll();
+
+        List<String> namesStudents = studentList.stream()
+                .filter(student -> student.getName().toUpperCase().startsWith("A"))
+                .map(Student::getName)
+                .map(String::toUpperCase)
+                .sorted()
+                .collect(Collectors.toList());
+        return namesStudents;
+    }
+    public Double getAvrAgeStudents() {
+        List<Student> studentList = studentRepository.findAll();
+
+        Double avrAge = studentList.stream()
+                .mapToDouble(Student::getAge)
+                .average().
+                getAsDouble();
+
+        return avrAge;
+
     }
 }
