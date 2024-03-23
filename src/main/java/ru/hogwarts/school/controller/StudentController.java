@@ -91,6 +91,16 @@ public class StudentController {
     public ResponseEntity<Double> getAvrAgeStudents() {
         return ResponseEntity.ok(studentService.getAvrAgeStudents());
     }
+    @GetMapping("/print-parallel")
+    @Operation(summary = "Print in console names all students with Thread")
+    public void printNamesStudentsWithHelpThread() {
+        studentService.printNamesStudentsWithHelpThread();
+    }
+    @GetMapping("/print-synchronized")
+    @Operation(summary = "Print in console names all students with synchronized Threads")
+    public void printNamesStudentsWithSynchronizedThread() {
+        studentService.printNamesStudentsWithSynchronizedThread();
+    }
 
    /* @PostConstruct
     public void forTest() {

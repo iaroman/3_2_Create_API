@@ -83,6 +83,50 @@ public class StudentServiceImpl implements StudentService{
                 getAsDouble();
 
         return avrAge;
+    }
+    public void printNamesStudentsWithHelpThread() {
+        List<String> namesStudent = studentRepository.findAll()
+                .stream()
+                .map(Student::getName)
+                .toList();
 
+        System.out.println("get 0 = " + namesStudent.get(0));
+        System.out.println("get 1 = " + namesStudent.get(1));
+
+        new Thread(() -> {
+            logger.info("Start Thread One");
+            System.out.println("get 2 = " + namesStudent.get(2));
+            System.out.println("get 3 = " + namesStudent.get(3));
+        }).start();
+
+        new Thread(() -> {
+            logger.info("Start Thread two");
+            System.out.println("get 4 = " + namesStudent.get(4));
+            System.out.println("get 5 = " + namesStudent.get(5));
+        }).start();
+    }
+
+    public void printNamesStudentsWithSynchronizedThread() {
+        List<String> namesStudent = studentRepository.findAll()
+                .stream()
+                .map(Student::getName)
+                .toList();
+
+        synchronized (namesStudent) {
+            System.out.println("get 0 = " + namesStudent.get(0));
+            System.out.println("get 1 = " + namesStudent.get(1));
+
+            new Thread(() -> {
+                logger.info("Start synchronized Thread One");
+                System.out.println("get 2 = " + namesStudent.get(2));
+                System.out.println("get 3 = " + namesStudent.get(3));
+            }).start();
+
+            new Thread(() -> {
+                logger.info("Start synchronized Thread two");
+                System.out.println("get 4 = " + namesStudent.get(4));
+                System.out.println("get 5 = " + namesStudent.get(5));
+            }).start();
+        }
     }
 }

@@ -18,5 +18,7 @@ public interface StudentService {
     Collection<Student> getLastFiveStudent();
     Collection<String> getListStudentsStartedWithA();
     Double getAvrAgeStudents();
+    void printNamesStudentsWithHelpThread();
+    void printNamesStudentsWithSynchronizedThread();
 }
 
