@@ -5,9 +5,10 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 @Entity
+//@Table(name = "student")
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
     private int age;

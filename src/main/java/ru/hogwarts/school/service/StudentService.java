@@ -10,8 +10,15 @@ public interface StudentService {
     void delete(Long id);
     Student get(Long id);
     Student update(Student student);
-    Collection<Student> getAll();
+    Collection<Student> getAll(/*Integer pageNumber, Integer pageSize*/);
     Collection<Student> findByAgeBetween(int from, int to);
     Faculty getFacultyById(Long studentId);
+    int countAllStudents();
+    double getAvgAgeStudents();
+    Collection<Student> getLastFiveStudent();
+    Collection<String> getListStudentsStartedWithA();
+    Double getAvrAgeStudents();
+    void printNamesStudentsWithHelpThread();
+    void printNamesStudentsWithSynchronizedThread();
 }
 

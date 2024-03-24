@@ -1,8 +1,7 @@
 package ru.hogwarts.school.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
-import jakarta.annotation.PostConstruct;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
@@ -45,12 +44,14 @@ public class StudentController {
     @GetMapping
     @Operation(summary = "Get all student or between from/to")
     public Collection<Student> getStudent(@RequestParam(required = false) Integer from,
-                                          @RequestParam(required = false) Integer to) {
+                                          @RequestParam(required = false) Integer to
+                                          /*@RequestParam Integer pageNumber,
+                                          @RequestParam Integer pageSize*/) {
 
         if ((from != null) & (to != null)) {
             return studentService.findByAgeBetween(from, to);
         }
-        return studentService.getAll();
+        return studentService.getAll(/*pageNumber, pageSize*/);
     }
 
     @PutMapping
@@ -65,6 +66,42 @@ public class StudentController {
         if (id != null)
             studentService.delete(id);
     }
+    @GetMapping("/count")
+    @Operation(summary = "Count all students in school")
+    public int countAllStudents() {
+        return studentService.countAllStudents();
+    }
+    @GetMapping("/average-age")
+    @Operation(summary = "Get average age students")
+    public double getAvgAgeStudents() {
+        return studentService.getAvgAgeStudents();
+    }
+    @GetMapping("/get-last-five")
+    @Operation(summary = "Get last five students")
+    public Collection<Student> getLastFiveStudent() {
+        return studentService.getLastFiveStudent();
+    }
+    @GetMapping("/get-started-with-A")
+    @Operation(summary = "Get List student starting with A")
+    public ResponseEntity<Collection<String>> getListStudentsStartedWithA() {
+        return ResponseEntity.ok(studentService.getListStudentsStartedWithA());
+    }
+    @GetMapping("/get-average-age")
+    @Operation(summary = "Get average age all students")
+    public ResponseEntity<Double> getAvrAgeStudents() {
+        return ResponseEntity.ok(studentService.getAvrAgeStudents());
+    }
+    @GetMapping("/print-parallel")
+    @Operation(summary = "Print in console names all students with Thread")
+    public void printNamesStudentsWithHelpThread() {
+        studentService.printNamesStudentsWithHelpThread();
+    }
+    @GetMapping("/print-synchronized")
+    @Operation(summary = "Print in console names all students with synchronized Threads")
+    public void printNamesStudentsWithSynchronizedThread() {
+        studentService.printNamesStudentsWithSynchronizedThread();
+    }
+
    /* @PostConstruct
     public void forTest() {
         studentService.create(new Student("first", 10));

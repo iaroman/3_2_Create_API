@@ -6,9 +6,10 @@ import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
+//@Table(name = "avatar")
 public class Avatar {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String filePath;
     private long fileSize;
